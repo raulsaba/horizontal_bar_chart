@@ -1,7 +1,9 @@
+part of horizontal_bar_chart;
+
 class HorizontalBarChartData {
   final String name;
   final double value;
-  final String? color;
+  final Color? color;
 
   HorizontalBarChartData({
     required this.name,
