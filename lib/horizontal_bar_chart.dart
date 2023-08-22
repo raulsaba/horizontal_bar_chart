@@ -33,8 +33,11 @@ class HorizontalBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color gridColor = Colors.black;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
+        print(constraints.maxWidth);
+        print(constraints.maxHeight);
         return SizedBox(
           height: constraints.maxHeight,
           width: constraints.maxWidth,
@@ -69,7 +72,7 @@ class HorizontalBarChart extends StatelessWidget {
                           Container(
                             width: 20,
                             height: 1,
-                            color: Theme.of(context).colorScheme.surface,
+                            color: gridColor,
                           ),
                           value != 0
                               ? Expanded(
@@ -86,7 +89,7 @@ class HorizontalBarChart extends StatelessWidget {
                               : Container(
                                   width: 2,
                                   height: 40,
-                                  color: Colors.black,
+                                  color: color ?? barsColors ?? Theme.of(context).colorScheme.primary,
                                 ),
                           (maxValue - (value + 1)).ceil() >= 0
                               ? Expanded(
