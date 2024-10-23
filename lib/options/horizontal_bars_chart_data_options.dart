@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-import '../horizontal_bar_chart.dart';
+part of horizontal_bar_chart;
 
 class HBCDataOptions {
   final bool showData;

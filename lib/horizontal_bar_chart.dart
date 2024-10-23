@@ -1,17 +1,20 @@
 library horizontal_bar_chart;
 
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
-import 'options/horizontal_bars_chart_data_options.dart';
-
 part 'data/horizontal_bar_chart_data.dart';
+part 'enum/horizontal_chart_bars_indicator_style.dart';
 part 'enum/horizontal_chart_bars_sort.dart';
 part 'options/grid/border_grid.dart';
 part 'options/grid/grid.dart';
 part 'options/grid/horizontal_grid.dart';
 part 'options/grid/outside_grid.dart';
 part 'options/grid/vertical_grid.dart';
+part 'options/horizontal_bars_chart_data_options.dart';
 part 'options/horizontal_bars_chart_grid_options.dart';
+part 'options/horizontal_bars_chart_indicator_options.dart';
 part 'options/horizontal_bars_chart_label_options.dart';
 part 'options/horizontal_bars_chart_options.dart';
 part 'painters/bars_painter.dart';
@@ -47,8 +50,8 @@ class HorizontalBarChart extends StatelessWidget {
       builder: (BuildContext context, BoxConstraints constraints) {
         return Center(
           child: SizedBox(
-            height: constraints.maxHeight / 2,
-            width: constraints.maxWidth / 2,
+            height: constraints.maxHeight,
+            width: constraints.maxWidth,
             child: Stack(
               children: [
                 CustomPaint(

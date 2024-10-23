@@ -59,6 +59,55 @@ class BarsPainter extends CustomPainter {
         );
       }
     }
+
+    if (options.indicator?.showIndicator == true) {
+      final Paint paint = Paint()
+        ..color = options.indicator!.color
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = options.indicator!.strokeWidth;
+
+      if (options.indicator!.style == HBCIndicatorStyle.dashed) {
+        drawDashedLine(
+          canvas: canvas,
+          p1: Offset(size.width * options.indicator!.widthPercentage, 0),
+          p2: Offset(size.width * options.indicator!.widthPercentage, size.height),
+          dashWidth: 5,
+          dashSpace: 5,
+          paint: paint,
+        );
+      } else {
+        final Path path = Path()
+          ..moveTo(size.width * options.indicator!.widthPercentage, 0)
+          ..lineTo(size.width * options.indicator!.widthPercentage, size.height);
+        canvas.drawPath(path, paint);
+      }
+    }
+  }
+
+  void drawDashedLine(
+      {required Canvas canvas,
+      required Offset p1,
+      required Offset p2,
+      required int dashWidth,
+      required int dashSpace,
+      required Paint paint}) {
+    var dx = p2.dx - p1.dx;
+    var dy = p2.dy - p1.dy;
+    final magnitude = sqrt(dx * dx + dy * dy);
+    dx = dx / magnitude;
+    dy = dy / magnitude;
+    final steps = magnitude ~/ (dashWidth + dashSpace);
+
+    var startX = p1.dx;
+    var startY = p1.dy;
+
+    for (int i = 0; i < steps; i++) {
+      final endX = startX + dx * dashWidth;
+      final endY = startY + dy * dashWidth;
+      canvas.drawLine(Offset(startX, startY), Offset(endX, endY), paint);
+      startX += dx * (dashWidth + dashSpace);
+      startY += dy * (dashWidth + dashSpace);
+    }
   }
 
   @override
@@ -67,6 +116,7 @@ class BarsPainter extends CustomPainter {
   }
 
   double get maxValue {
+    if (options.maxValue != null) return options.maxValue!;
     double maxValue = 0;
     for (int i = 0; i < data.length; i++) {
       if (data[i].value > maxValue) {
@@ -74,5 +124,15 @@ class BarsPainter extends CustomPainter {
       }
     }
     return maxValue;
+  }
+
+  double get minValue {
+    double minValue = double.infinity;
+    for (int i = 0; i < data.length; i++) {
+      if (data[i].value < minValue) {
+        minValue = data[i].value;
+      }
+    }
+    return minValue;
   }
 }

@@ -7,6 +7,8 @@ class HBCOptions {
   final HBCGridOptions? grid;
   final HBCDataOptions? data;
   final HBCLabelOptions? label;
+  final HBCIndicatorOptions? indicator;
+  final double? maxValue;
 
   HBCOptions({
     this.spaceBetweenBars = 0,
@@ -15,5 +17,7 @@ class HBCOptions {
     this.grid,
     this.data,
     this.label,
+    this.indicator,
+    this.maxValue,
   });
 }

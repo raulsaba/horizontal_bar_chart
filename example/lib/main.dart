@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:horizontal_bar_chart/horizontal_bar_chart.dart';
-import 'package:horizontal_bar_chart/options/horizontal_bars_chart_data_options.dart';
 
 import 'example_colors.dart';
 
@@ -75,26 +74,37 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
       ),
-      body: HorizontalBarChart(
-        data: data,
-        options: HBCOptions(
-          sort: HorizontalChartBarsSort.descending,
-          spaceBetweenBars: 8,
-          rightBorderRadius: 16,
-          data: HBCDataOptions(
-            showData: true,
-            getDataString: (data) {
-              return data.value.toStringAsFixed(2);
-            },
-          ),
-          grid: HBCGridOptions(
-            verticalGird: VerticalGird(showGrid: true),
-            horizontalGird: HorizontalGrid(showGrid: true),
-            borderGrid: BorderGrid(
-              left: OutsideGrid(showGrid: true),
-              top: OutsideGrid(showGrid: true),
-              right: OutsideGrid(showGrid: true),
-              bottom: OutsideGrid(showGrid: true),
+      body: Center(
+        child: SizedBox(
+          width: 800,
+          height: 600,
+          child: HorizontalBarChart(
+            data: data,
+            options: HBCOptions(
+              maxValue: 100,
+              spaceBetweenBars: 8,
+              rightBorderRadius: 16,
+              data: HBCDataOptions(
+                showData: true,
+                getDataString: (data) {
+                  return data.value.toStringAsFixed(2);
+                },
+              ),
+              indicator: HBCIndicatorOptions(
+                showIndicator: true,
+                style: HBCIndicatorStyle.dashed,
+                widthPercentage: 0.6,
+              ),
+              grid: HBCGridOptions(
+                verticalGird: VerticalGird(showGrid: true),
+                horizontalGird: HorizontalGrid(showGrid: true),
+                borderGrid: BorderGrid(
+                  left: OutsideGrid(showGrid: true),
+                  top: OutsideGrid(showGrid: true),
+                  right: OutsideGrid(showGrid: true),
+                  bottom: OutsideGrid(showGrid: true),
+                ),
+              ),
             ),
           ),
         ),
