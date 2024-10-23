@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:horizontal_bar_chart/horizontal_bar_chart.dart';
+import 'package:horizontal_bar_chart/options/horizontal_bars_chart_data_options.dart';
 
 import 'example_colors.dart';
 
@@ -35,19 +36,29 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<HorizontalBarChartData> data = [];
+  List<HBCData> data = [];
 
   _generateData() {
     data.clear();
 
     for (int i = 0; i < 10; i++) {
-      data.add(
-        HorizontalBarChartData(
-          name: "Item $i",
-          value: Random().nextDouble() * 100,
-          color: exampleColors[i],
-        ),
-      );
+      if (i == 5) {
+        data.add(
+          HBCData(
+            name: "Item $i",
+            value: 0,
+            color: exampleColors[i],
+          ),
+        );
+      } else {
+        data.add(
+          HBCData(
+            name: "Item $i",
+            value: Random().nextDouble() * 100,
+            color: exampleColors[i],
+          ),
+        );
+      }
     }
   }
 
@@ -66,6 +77,27 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: HorizontalBarChart(
         data: data,
+        options: HBCOptions(
+          sort: HorizontalChartBarsSort.descending,
+          spaceBetweenBars: 8,
+          rightBorderRadius: 16,
+          data: HBCDataOptions(
+            showData: true,
+            getDataString: (data) {
+              return data.value.toStringAsFixed(2);
+            },
+          ),
+          grid: HBCGridOptions(
+            verticalGird: VerticalGird(showGrid: true),
+            horizontalGird: HorizontalGrid(showGrid: true),
+            borderGrid: BorderGrid(
+              left: OutsideGrid(showGrid: true),
+              top: OutsideGrid(showGrid: true),
+              right: OutsideGrid(showGrid: true),
+              bottom: OutsideGrid(showGrid: true),
+            ),
+          ),
+        ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
