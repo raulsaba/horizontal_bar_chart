@@ -17,8 +17,10 @@ part 'options/horizontal_bars_chart_grid_options.dart';
 part 'options/horizontal_bars_chart_indicator_options.dart';
 part 'options/horizontal_bars_chart_label_options.dart';
 part 'options/horizontal_bars_chart_options.dart';
-part 'painters/bars_painter.dart';
-part 'painters/grid_painter.dart';
+part 'options/labels/axis_labels.dart';
+part 'options/labels/axis_x_labels.dart';
+part 'options/labels/axis_y_labels.dart';
+part 'painters/chart_painter.dart';
 
 class HorizontalBarChart extends StatelessWidget {
   const HorizontalBarChart({
@@ -45,7 +47,6 @@ class HorizontalBarChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const Color gridColor = Colors.grey;
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         return Center(
@@ -55,34 +56,12 @@ class HorizontalBarChart extends StatelessWidget {
             child: Stack(
               children: [
                 CustomPaint(
-                  painter: _GridPainter(
-                    color: gridColor,
-                    verticalGird: options?.grid?.verticalGird ??
-                        VerticalGird(
-                          showGrid: false,
-                          strokeWidth: 1,
-                        ),
-                    horizontalGird: options?.grid?.horizontalGird ??
-                        HorizontalGrid(
-                          showGrid: false,
-                          strokeWidth: 1,
-                        ),
-                    borderGrid: options?.grid?.borderGrid ??
-                        BorderGrid(
-                          left: OutsideGrid(showGrid: false, strokeWidth: 1),
-                          top: OutsideGrid(showGrid: false, strokeWidth: 1),
-                          right: OutsideGrid(showGrid: false, strokeWidth: 1),
-                          bottom: OutsideGrid(showGrid: false, strokeWidth: 1),
-                        ),
+                  painter: ChartPainter(
+                    data: sortedData,
+                    context: context,
+                    options: options ?? HBCOptions(),
                   ),
-                  child: CustomPaint(
-                    painter: BarsPainter(
-                      data: sortedData,
-                      context: context,
-                      options: options ?? HBCOptions(),
-                    ),
-                    child: Container(),
-                  ),
+                  child: Container(),
                 ),
               ],
             ),

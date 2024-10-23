@@ -90,10 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
                   return data.value.toStringAsFixed(2);
                 },
               ),
+              label: HBCLabelOptions(
+                axisXLabels: AxisXLabels(show: true),
+                axisYLabels: AxisYLabels(show: true),
+              ),
               indicator: HBCIndicatorOptions(
                 showIndicator: true,
                 style: HBCIndicatorStyle.dashed,
-                widthPercentage: 0.6,
+                widthPercentage: 0.65,
               ),
               grid: HBCGridOptions(
                 verticalGird: VerticalGird(showGrid: true),
