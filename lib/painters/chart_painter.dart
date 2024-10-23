@@ -24,8 +24,8 @@ class ChartPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    double yLabelsWidth = axisYLabels.width ?? size.width * 0.2;
-    double xLabelsHeight = axisXLabels.height ?? size.height * 0.1;
+    double yLabelsWidth = axisYLabels.show ? axisYLabels.width ?? size.width * 0.2 : 0;
+    double xLabelsHeight = axisXLabels.show ? axisXLabels.height ?? size.height * 0.1 : 0;
     Size chartSize = Size(size.width - yLabelsWidth, size.height - xLabelsHeight);
 
     if (axisYLabels.show) {
