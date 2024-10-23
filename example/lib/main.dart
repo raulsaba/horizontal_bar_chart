@@ -82,8 +82,8 @@ class _MyHomePageState extends State<MyHomePage> {
             data: data,
             options: HBCOptions(
               maxValue: 100,
-              spaceBetweenBars: 0,
-              rightBorderRadius: 0,
+              spaceBetweenBars: 8,
+              rightBorderRadius: 16,
               data: HBCDataOptions(
                 showData: true,
                 getDataString: (data) {
@@ -91,8 +91,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
               label: HBCLabelOptions(
-                axisXLabels: AxisXLabels(show: false),
-                axisYLabels: AxisYLabels(show: false),
+                axisXLabels: AxisXLabels(show: true),
+                axisYLabels: AxisYLabels(show: true),
               ),
               indicator: HBCIndicatorOptions(
                 showIndicator: true,
